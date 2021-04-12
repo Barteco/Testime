@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testime", "Testime\Testime.csproj", "{8FA9E5AB-532F-48FC-917E-9CC5ABF5E680}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{06DDDF3E-F609-473C-8D2C-192783ABE19F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3DE52775-E6EC-4920-8E30-DAD1B780516F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testime.Automation", "src\Testime.Automation\Testime.Automation.csproj", "{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +15,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8FA9E5AB-532F-48FC-917E-9CC5ABF5E680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FA9E5AB-532F-48FC-917E-9CC5ABF5E680}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FA9E5AB-532F-48FC-917E-9CC5ABF5E680}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FA9E5AB-532F-48FC-917E-9CC5ABF5E680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{572A3D92-1CEE-4005-AA35-E9BF03EE6DD5} = {06DDDF3E-F609-473C-8D2C-192783ABE19F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C9D6437-DE47-4E72-BAF2-05DD1F25508E}
