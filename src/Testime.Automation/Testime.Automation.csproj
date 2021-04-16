@@ -1,7 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>Testime.Automation</PackageId>
+    <Version>0.0.1</Version>
+    <OutputType>Library</OutputType>
+    <Authors>Barteco</Authors>
+    <Description>Automation test toolkit</Description>
+    <PackageTags>testing automation xunit selenium</PackageTags>
+    <Copyright>Copyright © Barteco</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/Barteco/Testime</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Barteco/Testime</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(SolutionDir)/artifacts</PackageOutputPath>
   </PropertyGroup>
   
   <ItemGroup>
@@ -12,4 +27,8 @@
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
   </ItemGroup>
   
+   <ItemGroup>
+    <None Include="..\..\assets\logo.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
 </Project>
