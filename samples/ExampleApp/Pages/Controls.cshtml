@@ -1,0 +1,155 @@
+﻿@page
+@model ControlsModel
+@{
+    ViewData["Title"] = "Controls";
+}
+
+<div id="Controls" class="container">
+    <div class="row">
+        <div class="col-sm-2">Name</div>
+        <div class="col-sm-10">
+            <input type="text" id="Name" class="form-control" placeholder="Type your name...">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Description</div>
+        <div class="col-sm-10">
+            <textarea id="Description" class="form-control" rows="5" placeholder="Type your description...."></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Gender</div>
+        <div class="col-sm-10">
+            <input type="radio" id="Male" name="Gender" value="Male" /> Male <br />
+            <input type="radio" id="Female" name="Gender" value="Female" /> Female
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Accept terms</div>
+        <div class="col-sm-10">
+            <input type="checkbox" id="AcceptTerms" value="Male" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Select country</div>
+        <div class="col-sm-10">
+            <select id="Country">
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="Mexico">Mexico</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Buttons</div>
+        <div class="col-sm-10">
+            <input type="button" id="Hide" value="Hide" class="btn btn-primary" onclick="this.style.visibility='hidden';" />
+            <input type="submit" id="Disable" value="Disable" class="btn btn-primary" onclick="this.setAttribute('disabled', 'disabled');" />
+            <button id="ToggleText" class="btn btn-primary" onclick="this.innerText='ToggledText';">ToggleText</button>
+            <button id="ToggleClass" class="btn btn-primary" onclick="this.classList.remove('btn-primary'); this.classList.add('btn-danger');">ToggleClass</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Favourites meals</div>
+        <div class="col-sm-10">
+            <ul id="Meals">
+                <li>Pizza</li>
+                <li>Pasta</li>
+                <li>Burger</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Favourites meals ordered</div>
+        <div class="col-sm-10">
+            <ol id="OrderedMeals">
+                <li>Pizza</li>
+                <li>Pasta</li>
+                <li>Burger</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">History</div>
+        <div class="col-sm-10">
+            <table id="History" class="table">
+                <tr>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>1991</td>
+                    <td>Birth</td>
+                </tr>
+                <tr>
+                    <td>2021</td>
+                    <td>Testing</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Homepage</div>
+        <div class="col-sm-10">
+            <a id="Homepage" href="#" target="_blank">Homepage</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Photo</div>
+        <div class="col-sm-10">
+            <img id="Photo" src="http://www.newdesignfile.com/postpic/2015/06/person-profile-icon_291728.png" width="100" height="100" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Children</div>
+        <div class="col-sm-10">
+            <div id="Children">
+                <div id="Child1">
+                    <div id="GrandChild1">gc1</div>
+                    <div id="GrandChild2">gc2</div>
+                    <div id="GrandChild3">gc3</div>
+                </div>
+                <div id="Child2">c2</div>
+                <div id="Child3">c3</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Dynamic</div>
+        <div class="col-sm-10">
+            <div id="DynamicChildren">
+                <button id="AddDynamicChild" class="btn btn-primary" onclick="var div = document.createElement('div'); div.className = 'DynamicChild'; div.innerText = 'dc'; document.getElementById('DynamicChildren').appendChild(div);">Add</button>
+                <button id="RemoveDynamicChild" class="btn btn-primary" onclick="var div = document.getElementById('DynamicChildren'); div.removeChild(div.getElementsByClassName('DynamicChild')[0]);">Remove</button>
+
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">Multiple</div>
+        <div class="col-sm-10">
+            <div id="MultipleChildren">
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+                <div class="DynamicChild">dc</div>
+            </div>
+        </div>
+    </div>
+</div>
