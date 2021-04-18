@@ -14,7 +14,7 @@ namespace ExampleApp.Tests.WebApp
             _settings = new WebApplicationSettings
             {
                 Browser = WebBrowser.Chrome,
-                RunMode = RunMode.Default
+                RunMode = RunMode.Headless
             };
 
             _host = Host.CreateDefaultBuilder()
