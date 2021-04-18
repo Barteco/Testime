@@ -12,9 +12,9 @@ namespace Testime.Automation.Web
 
         public static WebApplicationSettings Default => new ();
 
-        public WebApplicationSettings Apply(Action<WebApplicationSettings> settingsBuilder)
+        public WebApplicationSettings Apply(Action<WebApplicationSettings> settings)
         {
-            settingsBuilder(this);
+            settings?.Invoke(this);
 
             return this;
         }

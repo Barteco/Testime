@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 using System.IO;
-using Testime.Automation.Components;
+using Testime.Automation.Elements;
 
 namespace Testime.Automation.Internal
 {
@@ -24,22 +24,22 @@ namespace Testime.Automation.Internal
             return new Bitmap(memoryStream);
         }
 
-        public Bitmap TakeComponentScreenshot(Component component, int margin = 0)
+        public Bitmap TakeElementScreenshot(HtmlElement element, int margin = 0)
         {
-            component.ScrollTo(margin);
+            element.ScrollTo(margin);
 
-            var componentLocation = component.Location;
-            var componentSize = component.Size;
+            var elementLocation = element.Location;
+            var elementSize = element.Size;
             var scrollPosition = _driver.GetScrollPosition();
             var rawScreenshot = _driver.GetScreenshot().AsByteArray;
 
             using (var memoryStream = new MemoryStream(rawScreenshot))
             using (var windowScreenshot = new Bitmap(memoryStream))
             {
-                var startX = componentLocation.X - scrollPosition.X - margin;
-                var startY = componentLocation.Y - scrollPosition.Y - margin;
-                var endX = startX + componentSize.Width + 2 * margin;
-                var endY = startY + componentSize.Height + 2 * margin;
+                var startX = elementLocation.X - scrollPosition.X - margin;
+                var startY = elementLocation.Y - scrollPosition.Y - margin;
+                var endX = startX + elementSize.Width + 2 * margin;
+                var endY = startY + elementSize.Height + 2 * margin;
 
                 startX = Math.Clamp(startX, 0, windowScreenshot.Width);
                 endX = Math.Clamp(endX, 0, windowScreenshot.Width);

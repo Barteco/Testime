@@ -11,9 +11,9 @@ namespace Testime.Automation.Attributes
             _id = id;
         }
 
-        public override IWebElement Initialize(IWebDriver driver)
+        public override By Locate()
         {
-            return driver.FindElement(By.Id(_id));
+            return By.Id(_id);
         }
     }
 }

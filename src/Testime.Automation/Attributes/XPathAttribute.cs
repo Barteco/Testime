@@ -11,9 +11,9 @@ namespace Testime.Automation.Attributes
             _xpath = xpath;
         }
 
-        public override IWebElement Initialize(IWebDriver driver)
+        public override By Locate()
         {
-            return driver.FindElement(By.XPath(_xpath));
+            return By.XPath(_xpath);
         }
     }
 }

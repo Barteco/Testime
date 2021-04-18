@@ -11,9 +11,9 @@ namespace Testime.Automation.Attributes
             _tagName = tagName;
         }
 
-        public override IWebElement Initialize(IWebDriver driver)
+        public override By Locate()
         {
-            return driver.FindElement(By.TagName(_tagName));
+            return By.TagName(_tagName);
         }
     }
 }

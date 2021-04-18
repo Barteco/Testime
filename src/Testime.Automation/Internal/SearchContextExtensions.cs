@@ -2,26 +2,26 @@
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 using System.Linq;
-using Testime.Automation.Components;
+using Testime.Automation.Elements;
 
 namespace Testime.Automation.Internal
 {
     internal static class SearchContextExtensions
     {
-        public static TComponent FindComponent<TComponent>(this ISearchContext context, RemoteWebDriver driver, By by) where TComponent : Component, new()
+        public static TElement FindElement<TElement>(this ISearchContext context, RemoteWebDriver driver, By by) where TElement : HtmlElement, new()
         {
-            var component = new TComponent();
-            component.Initialize(driver, context.FindElement(by));
-            return component;
+            var element = new TElement();
+            element.Initialize(driver, context.FindElement(by));
+            return element;
         }
 
-        public static IEnumerable<TComponent> FindComponents<TComponent>(this ISearchContext context, RemoteWebDriver driver, By by) where TComponent : Component, new()
+        public static IEnumerable<TElement> FindElements<TElement>(this ISearchContext context, RemoteWebDriver driver, By by) where TElement : HtmlElement, new()
         {
-            return context.FindElements(by).Select(element =>
+            return context.FindElements(by).Select(e =>
             {
-                var component = new TComponent();
-                component.Initialize(driver, element);
-                return component;
+                var element = new TElement();
+                element.Initialize(driver, e);
+                return element;
             });
         }
     }

@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
+using Testime.Automation.Attributes;
 
-namespace Testime.Automation.Components
+namespace Testime.Automation.Elements
 {
-    public class RadioBox : Component
+    [TagConstraint("input", "radio")]
+    public class RadioBox : HtmlElement
     {
         public bool Checked
         {

@@ -3,11 +3,17 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Testime.Automation.Internal;
 
-namespace Testime.Automation.Components
+namespace Testime.Automation.Elements
 {
-    public abstract class Component
+    public class HtmlVirtualElement
+    {
+
+    }
+
+    public abstract class HtmlElement
     {
         protected IWebElement Self { get; private set; }
 
@@ -18,6 +24,7 @@ namespace Testime.Automation.Components
         public string Data(string dataAttribute) => Attribute($"data-{dataAttribute}");
         public string Attribute(string attribute) => Self.GetAttribute($"{attribute}");
         public string CssValue(string propertyName) => Self.GetCssValue(propertyName);
+        public List<string> ClassList => Attribute("class").Split().ToList();
         public string Tag => Self.TagName;
         public Point Location => Self.Location;
         public Point Center => new (Location.X + (Size.Width / 2), Location.Y + (Size.Height / 2));
@@ -62,17 +69,17 @@ namespace Testime.Automation.Components
 
         public Bitmap TakeScreenshot(int margin = 0)
         {
-            return new ScreenshotActions(_driver).TakeComponentScreenshot(this, margin);
+            return new ScreenshotActions(_driver).TakeElementScreenshot(this, margin);
         }
 
-        public TComponent FindComponent<TComponent>(By by) where TComponent : Component, new()
+        public TElement FindElement<TElement>(By by) where TElement : HtmlElement, new()
         {
-            return Self.FindComponent<TComponent>(_driver, by);
+            return Self.FindElement<TElement>(_driver, by);
         }
 
-        public IEnumerable<TComponent> FindComponents<TComponent>(By by) where TComponent : Component, new()
+        public IEnumerable<TElement> FindElements<TElement>(By by) where TElement : HtmlElement, new()
         {
-            return Self.FindComponents<TComponent>(_driver, by);
+            return Self.FindElements<TElement>(_driver, by);
         }
 
         protected int? TryGetIntegerAttribute(string attributeName)
@@ -102,6 +109,11 @@ namespace Testime.Automation.Components
         {
             _driver = driver;
             Self = self;
+
+            if (this is IHtmlContainer container)
+            {
+                HtmlElementInitializer.InitializeContainer(container, Self, _driver);
+            }
         }
     }
 }

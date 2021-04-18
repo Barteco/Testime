@@ -1,12 +1,11 @@
-﻿namespace Testime.Automation.Components
+﻿using Testime.Automation.Attributes;
+
+namespace Testime.Automation.Elements
 {
-    public class TextBox : Component
+    [TagConstraint("textarea")]
+    public class TextArea : HtmlElement
     {
-        public string Value
-        {
-            get => Attribute("value");
-            set => SetValue(value);
-        }
+        public string Value => Attribute("value");
 
         public string Placeholder => Attribute("placeholder");
 
@@ -17,5 +16,10 @@
         public int? Cols => TryGetIntegerAttribute("cols");
 
         public bool Disabled => !Self.Enabled;
+
+        public new void SetValue(string value)
+        {
+            base.SetValue(value);
+        }
     }
 }

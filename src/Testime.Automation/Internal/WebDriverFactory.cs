@@ -2,10 +2,9 @@
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
-using System.IO;
-using System.Reflection;
+using Testime.Automation.Web;
 
-namespace Testime.Automation.Web
+namespace Testime.Automation.Internal
 {
     internal static class WebDriverFactory
     {
@@ -17,13 +16,12 @@ namespace Testime.Automation.Web
                 {
                     var options = new FirefoxOptions
                     {
-                        BrowserExecutableLocation = GetBinDirectory(),
                         AcceptInsecureCertificates = settings.AcceptInsecureCertificates
                     };
 
                     if (settings.RunMode == RunMode.Headless)
                     {
-                        options.AddArgument("-headless");
+                        options.AddArgument("--headless");
                     }
 
                     return new FirefoxDriver(options);
@@ -44,7 +42,7 @@ namespace Testime.Automation.Web
                     {
                         options.AddArgument("--start-maximized");
                     }
-                    return new ChromeDriver(GetBinDirectory(), options);
+                    return new ChromeDriver(options);
                 }
 
                 default:
@@ -52,11 +50,6 @@ namespace Testime.Automation.Web
                     throw new Exception("Unsupported browser");
                 }
             }
-        }
-
-        private static string GetBinDirectory()
-        {
-            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
     }
 }

@@ -1,31 +1,31 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Testime.Automation.Components;
+using System.IO;
+using Testime.Automation.Elements;
+using Testime.Automation.Internal;
 using Testime.Automation.Waiting;
 
 namespace Testime.Automation.Web
 {
-    public abstract class WebApplication<TApp> : IAsyncDisposable where TApp : WebApplication<TApp>
+    public abstract class WebApplication<TApp> : IDisposable where TApp : WebApplication<TApp>
     {
         public Wait Wait => new(_driver);
 
         private RemoteWebDriver _driver;
-        private readonly IWebHost _host;
+        private readonly IHost _host;
         private readonly WebApplicationSettings _settings;
-        private string _baseAddress;
 
-        protected WebApplication(IWebHost host, Action<WebApplicationSettings> settingsBuilder)
+        public Uri Url => new (_settings.Url);
+
+        protected WebApplication(IHost host, WebApplicationSettings settings = null)
         {
             _host = host;
-            _settings = WebApplicationSettings.Default
-                .Apply(settingsBuilder);
+            _settings = settings ?? WebApplicationSettings.Default;
         }
 
-        public TApp Launch()
+        public TApp Start()
         {
             StartHost();
             StartDriver();
@@ -33,16 +33,9 @@ namespace Testime.Automation.Web
             return (TApp) this;
         }
 
-        public TPage OpenDefaultPage<TPage>() where TPage : Page, new()
-        {
-            NavigateTo(_baseAddress);
-            return OpenPage<TPage>();
-        }
-
-        public TPage OpenPage<TPage>() where TPage : Page, new()
+        public TPage OpenPage<TPage>() where TPage : HtmlPage, new()
         {
             EnsureRunning();
-
             Wait.UntilDocumentReady();
 
             var page = new TPage();
@@ -50,24 +43,29 @@ namespace Testime.Automation.Web
             return page;
         }
 
-        public void NavigateTo(string url)
+        public TPage NavigatePage<TPage>(string url) where TPage : HtmlPage, new()
+        {
+            EnsureRunning();
+            _driver.Navigate().GoToUrl($"{_settings.Url.TrimEnd('/')}/{url.TrimStart('/')}");
+            return OpenPage<TPage>();
+        }
+
+        public TApp NavigateUrl(string url)
         {
             EnsureRunning();
             _driver.Navigate().GoToUrl(url);
+            return (TApp)this;
         }
 
-        public virtual async ValueTask DisposeAsync()
+        public void Dispose()
         {
-            _driver?.Dispose();
-            await _host?.StopAsync();
+            _driver?.Quit();
+            _host?.StopAsync().Wait();
         }
 
         private void StartHost()
         {
-            _host.Start();
-            _baseAddress = _host.ServerFeatures
-                .Get<IServerAddressesFeature>()
-                .Addresses.First();
+            _host?.Start();
         }
 
         private void StartDriver()
