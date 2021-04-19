@@ -5,11 +5,12 @@ using Testime.Automation.Web;
 
 namespace ExampleApp.Tests.WebApp
 {
-    public class WebAppFixture : IDisposable
+    public class ExampleAppFixture : IDisposable
     {
-        private readonly MyExampleApp _app;
+        private readonly ExampleApplication _app;
+        private readonly IHost _host;
 
-        public WebAppFixture()
+        public ExampleAppFixture()
         {
             var settings = new WebApplicationSettings
             {
@@ -17,7 +18,7 @@ namespace ExampleApp.Tests.WebApp
                 RunMode = RunMode.Headless
             };
 
-            var host = Host.CreateDefaultBuilder()
+            _host = Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
@@ -25,16 +26,19 @@ namespace ExampleApp.Tests.WebApp
                 })
                 .Build();
 
-            _app = new MyExampleApp(host, settings);
+            _host.Start();
+
+            _app = new ExampleApplication(settings);
         }
 
-        public MyExampleApp LaunchApp()
+        public ExampleApplication LaunchApp()
         {
             return _app.OpenDefaultPage();
         }
 
         public void Dispose()
         {
+            _host?.StopAsync().Wait();
             _app?.Dispose();
         }
     }

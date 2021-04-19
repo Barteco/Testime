@@ -5,11 +5,11 @@ using Xunit;
 
 namespace ExampleApp.Tests
 {
-    public class PageObjectModelTests : IClassFixture<WebAppFixture>
+    public class PageObjectModelTests : IClassFixture<ExampleAppFixture>
     {
-        private readonly WebAppFixture _fixture;
+        private readonly ExampleAppFixture _fixture;
 
-        public PageObjectModelTests(WebAppFixture fixture)
+        public PageObjectModelTests(ExampleAppFixture fixture)
         {
             _fixture = fixture;
         }
