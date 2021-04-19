@@ -1,36 +1,41 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
 using Testime.Automation.Web;
 
 namespace ExampleApp.Tests.WebApp
 {
-    public class WebAppFixture
+    public class WebAppFixture : IDisposable
     {
-        private WebApplicationSettings _settings;
-        private IHost _host;
+        private readonly MyExampleApp _app;
 
         public WebAppFixture()
         {
-            _settings = new WebApplicationSettings
+            var settings = new WebApplicationSettings
             {
                 Browser = WebBrowser.Chrome,
                 RunMode = RunMode.Headless
             };
 
-            _host = Host.CreateDefaultBuilder()
+            var host = Host.CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls(_settings.Url);
+                    webBuilder.UseUrls(settings.Url);
                 })
                 .Build();
+
+            _app = new MyExampleApp(host, settings);
         }
 
         public MyExampleApp LaunchApp()
         {
-            return new MyExampleApp(_host, _settings)
-                .Start()
-                .NavigateUrl(_settings.Url);
+            return _app.OpenDefaultPage();
+        }
+
+        public void Dispose()
+        {
+            _app?.Dispose();
         }
     }
 }

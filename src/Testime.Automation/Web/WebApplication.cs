@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using OpenQA.Selenium.Remote;
 using System;
-using System.IO;
 using Testime.Automation.Elements;
 using Testime.Automation.Internal;
 using Testime.Automation.Waiting;
@@ -17,20 +16,21 @@ namespace Testime.Automation.Web
         private readonly IHost _host;
         private readonly WebApplicationSettings _settings;
 
-        public Uri Url => new (_settings.Url);
+        public Uri Url => new(_settings.Url);
 
         protected WebApplication(IHost host, WebApplicationSettings settings = null)
         {
-            _host = host;
             _settings = settings ?? WebApplicationSettings.Default;
+            _driver = WebDriverFactory.CreateDriver(_settings);
+            _host = host;
+            _host?.Start();
         }
 
-        public TApp Start()
+        public TApp OpenDefaultPage()
         {
-            StartHost();
-            StartDriver();
-
-            return (TApp) this;
+            EnsureRunning();
+            _driver.Navigate().GoToUrl(_settings.Url);
+            return (TApp)this;
         }
 
         public TPage OpenPage<TPage>() where TPage : HtmlPage, new()
@@ -50,33 +50,10 @@ namespace Testime.Automation.Web
             return OpenPage<TPage>();
         }
 
-        public TApp NavigateUrl(string url)
-        {
-            EnsureRunning();
-            _driver.Navigate().GoToUrl(url);
-            return (TApp)this;
-        }
-
         public void Dispose()
         {
             _driver?.Quit();
             _host?.StopAsync().Wait();
-        }
-
-        private void StartHost()
-        {
-            _host?.Start();
-        }
-
-        private void StartDriver()
-        {
-            _driver = WebDriverFactory.CreateDriver(_settings);
-
-            if (_settings.RunMode == RunMode.Minimized)
-                _driver.Manage().Window.Minimize();
-
-            if (_settings.RunMode == RunMode.Maximized)
-                _driver.Manage().Window.Maximize();
         }
 
         private void EnsureRunning()

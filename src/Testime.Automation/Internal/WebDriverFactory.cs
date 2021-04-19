@@ -10,6 +10,22 @@ namespace Testime.Automation.Internal
     {
         public static RemoteWebDriver CreateDriver(WebApplicationSettings settings)
         {
+            var driver = CreateDriverByBrowser(settings);
+
+            if (settings.RunMode == RunMode.Minimized)
+            {
+                driver.Manage().Window.Minimize();
+            }
+
+            if (settings.RunMode == RunMode.Maximized)
+            {
+                driver.Manage().Window.Maximize();
+            }
+            return driver;
+        }
+
+        private static RemoteWebDriver CreateDriverByBrowser(WebApplicationSettings settings)
+        {
             switch (settings.Browser)
             {
                 case WebBrowser.Firefox:

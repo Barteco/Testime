@@ -18,7 +18,7 @@ namespace ExampleApp.Tests
         public void LoadHomePage()
         {
             // Arrange
-            using var sut = _fixture.LaunchApp();
+            var sut = _fixture.LaunchApp();
 
             // Act
             var homePage = sut.OpenPage<HomePage>();
@@ -31,7 +31,7 @@ namespace ExampleApp.Tests
         public void LoadControlsPage()
         {
             // Arrange
-            using var sut = _fixture.LaunchApp();
+            var sut = _fixture.LaunchApp();
 
             // Act
             var controlsPage = sut.NavigatePage<ControlsPage>("/Controls");
