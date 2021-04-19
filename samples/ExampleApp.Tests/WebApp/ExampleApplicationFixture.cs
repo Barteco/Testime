@@ -5,12 +5,12 @@ using Testime.Automation.Web;
 
 namespace ExampleApp.Tests.WebApp
 {
-    public class ExampleAppFixture : IDisposable
+    public class ExampleApplicationFixture : IDisposable
     {
         private readonly ExampleApplication _app;
         private readonly IHost _host;
 
-        public ExampleAppFixture()
+        public ExampleApplicationFixture()
         {
             var settings = new WebApplicationSettings
             {
