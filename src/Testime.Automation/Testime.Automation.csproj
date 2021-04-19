@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>Testime.Automation</PackageId>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <OutputType>Library</OutputType>
     <Authors>Barteco</Authors>
     <Description>Automation test toolkit</Description>
