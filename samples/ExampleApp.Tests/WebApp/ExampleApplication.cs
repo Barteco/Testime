@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using Testime.Automation.Web;
+﻿using Testime.Automation.Web;
 
 namespace ExampleApp.Tests.WebApp
 {
