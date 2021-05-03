@@ -24,9 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApp", "samples\Examp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApp.Tests", "samples\ExampleApp.Tests\ExampleApp.Tests.csproj", "{AE9F5B78-51F0-44D3-972A-ABAF025416B1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{EA241173-8E8D-4469-9B7C-E880E6DB5A31}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{336D2FBD-E634-4BAE-9E3B-E59C6303EEF1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{EA241173-8E8D-4469-9B7C-E880E6DB5A31}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build-and-push.yml = .github\workflows\build-and-push.yml
 		.github\workflows\build.yml = .github\workflows\build.yml
@@ -59,7 +57,6 @@ Global
 		{82CFDF22-35D8-4187-BD57-873E88F6D516} = {611B92D4-7E2C-4FCF-A74F-7AB5B8803ED4}
 		{AE9F5B78-51F0-44D3-972A-ABAF025416B1} = {611B92D4-7E2C-4FCF-A74F-7AB5B8803ED4}
 		{EA241173-8E8D-4469-9B7C-E880E6DB5A31} = {4E6E8D52-FD55-4095-8466-1B9D05B043B8}
-		{336D2FBD-E634-4BAE-9E3B-E59C6303EEF1} = {EA241173-8E8D-4469-9B7C-E880E6DB5A31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C9D6437-DE47-4E72-BAF2-05DD1F25508E}
