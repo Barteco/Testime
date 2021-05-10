@@ -8,22 +8,23 @@ namespace Testime.Automation.Web
 {
     public abstract class WebApplication<TApp> : IDisposable where TApp : WebApplication<TApp>
     {
+        public Uri Url { get; }
+
         public Wait Wait => new(_driver);
 
         private RemoteWebDriver _driver;
         private readonly WebApplicationSettings _settings;
 
-        public Uri Url => new(_settings.Url);
-
         protected WebApplication(WebApplicationSettings settings = null)
         {
             _settings = settings ?? WebApplicationSettings.Default;
             _driver = WebDriverFactory.CreateDriver(_settings);
+            Url = new($"{_settings.Url.TrimEnd('/')}/{_settings.UrlPathbase?.Trim('/')}".TrimEnd('/'));
         }
 
         public TApp OpenDefaultPage()
         {
-            _driver.Navigate().GoToUrl(_settings.Url);
+            _driver.Navigate().GoToUrl(Url);
             return (TApp)this;
         }
 
@@ -38,7 +39,7 @@ namespace Testime.Automation.Web
 
         public TPage NavigatePage<TPage>(string url) where TPage : HtmlPage, new()
         {
-            _driver.Navigate().GoToUrl($"{_settings.Url.TrimEnd('/')}/{url.TrimStart('/')}");
+            _driver.Navigate().GoToUrl($"{Url}/{url.TrimStart('/')}");
             return OpenPage<TPage>();
         }
 

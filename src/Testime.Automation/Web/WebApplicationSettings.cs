@@ -6,6 +6,7 @@ namespace Testime.Automation.Web
     public class WebApplicationSettings
     {
         public string Url { get; set; } = EndpointHelper.GenerateLocalEndpoint();
+        public string UrlPathbase { get; set; }
         public WebBrowser Browser { get; set; } = WebBrowser.Chrome;
         public RunMode RunMode { get; set; } = RunMode.Default;
         public bool AcceptInsecureCertificates { get; set; } = true;
