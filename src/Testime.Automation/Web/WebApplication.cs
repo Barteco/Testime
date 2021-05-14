@@ -39,7 +39,7 @@ namespace Testime.Automation.Web
 
         public TPage NavigatePage<TPage>(string url) where TPage : HtmlPage, new()
         {
-            _driver.Navigate().GoToUrl($"{Url}/{url.TrimStart('/')}");
+            _driver.Navigate().GoToUrl($"{Url.ToString().TrimEnd('/')}/{url.TrimStart('/')}");
             return OpenPage<TPage>();
         }
 
